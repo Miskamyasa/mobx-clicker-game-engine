@@ -15,22 +15,61 @@ This package provides a data‑driven clicker‑game engine (MobX stores + save 
 ## How to Use (Step by Step)
 
 1. **Generate game setting data first.**  
-   Create a new setting under `public/settings/<setting>/` with JSON files for `workers`, `levels`, `operations`, `upgrades`, `achievements`, `articles`, and `prestige-upgrades`.  
-   Use the example in `repomix-output.xml` as the reference for structure and data patterns.
-2. **Create a new frontend app.**  
-   Start a fresh React/Vue/other project (Vite, Next, Nuxt, etc.).
-3. **Install the engine package.**  
-   Add the engine dependency to your app.
-4. **Wire the engine to your data URLs.**  
-   Create the engine instance and provide the URLs for your setting JSON files (see `src/engine.ts` for the pattern).
+
+- Create a new setting under `public/settings/<setting>/` with JSON files for `workers`, `levels`, `operations`, `upgrades`, `achievements`, `articles`, and `prestige-upgrades`.  
+- Use the engine Zod schemas in `src/stores/*.ts` as the reference for structure and validation rules.
+
+2. **Create a new frontend app.** 
+
+Start a fresh React/Vue/other project (Vite, Next, Nuxt, etc.).
+
+3. **Install the engine package.** 
+
+Add the engine dependency to your app.
+   
+4. **Wire the engine to your data URLs.** 
+
+Provide `dataUrls` with required keys: `workers`, `levels`, `operations`, `upgrades`, `achievements`, `articles`, `prestigeUpgrades`.
+
+Example (Vite/Next public assets):
+
+```ts
+import {createEngine} from "@miskamyasa/mobx-clicker-game-engine"
+
+const setting = "ocean" // folder name under /public/settings/<setting>/
+
+export const engine = createEngine({
+  dataUrls: {
+    workers: `/settings/${setting}/workers.json`,
+    levels: `/settings/${setting}/levels.json`,
+    operations: `/settings/${setting}/operations.json`,
+    upgrades: `/settings/${setting}/upgrades.json`,
+    achievements: `/settings/${setting}/achievements.json`,
+    articles: `/settings/${setting}/articles.json`,
+    prestigeUpgrades: `/settings/${setting}/prestige-upgrades.json`,
+  },
+})
+```
+
+Notes:
+- The *object keys* must match the engine contract; the *filenames* can be anything.
+- Use the engine Zod schemas in `src/stores/*.ts` as the source of truth for JSON structure.
+
 5. **Render core stats.**  
-   Show resources, level, and progression state from the engine.
-6. **Add the primary click action.**  
-   Bind a button to the main action (e.g., “dive” / “click”).
-7. **Add automation and upgrades.**  
-   Build panels for workers and upgrades and wire them to the engine actions.
-8. **Add operations and codex UI.**  
-   Render operations, achievements, and articles as your content expands.
+
+Show resources, level, and progression state from the engine.
+
+6. **Add the primary click action.** 
+
+Bind a button to the main action (e.g., “dive” / “click”).
+
+7. **Add automation and upgrades.** 
+
+Build panels for workers and upgrades and wire them to the engine actions.
+
+8. **Add operations and codex UI.** 
+
+Render operations, achievements, and articles as your content expands.
 
 ## Framework Integration
 
