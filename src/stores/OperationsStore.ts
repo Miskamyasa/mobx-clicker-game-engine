@@ -1,7 +1,7 @@
-import {makeAutoObservable, runInAction} from "mobx"
-import {z} from "zod"
+import { makeAutoObservable, runInAction } from "mobx"
+import { z } from "zod"
 
-import type {RootStore} from "./RootStore"
+import type { RootStore } from "./RootStore"
 import {
     type ActiveBonus,
     bonusSchema,
@@ -13,17 +13,17 @@ import {
     operationsSnapshotSchema,
     resourceSchema
 } from "./shared"
-import {raritySchema} from "./shared"
+import { raritySchema } from "./shared"
 
 
 const costSchema = z.object({
-    energy: nonNegativeIntegerSchema.optional(),
-    output: nonNegativeIntegerSchema.optional(),
-    reputation: nonNegativeIntegerSchema.optional(),
-    money: nonNegativeIntegerSchema.optional(),
+    energy: nonNegativeIntegerSchema.default(0),
+    output: nonNegativeIntegerSchema.default(0),
+    reputation: nonNegativeIntegerSchema.default(0),
+    money: nonNegativeIntegerSchema.default(0),
 }).refine(
-    (data) => data.energy || data.money || data.output,
-    {message: "At least one of resources must be specified"}
+    (data) => !Object.values(data).every((v) => v === 0),
+    { message: "At least one of resources must be specified" }
 ).readonly()
 
 const rewardsSchema = z.object({
@@ -97,7 +97,7 @@ export class OperationsStore {
     private tick = 0
 
     // Active timeout for the next state transition
-    private timeoutId?: ReturnType<typeof setTimeout>
+    private timeoutId: ReturnType<typeof setTimeout> | undefined
 
     // Helper to determine operation phase based on progress and current time
     private getOperationPhase(
@@ -337,6 +337,9 @@ export class OperationsStore {
 
     canAffordOperation(operation: Operation): boolean {
         for (const cost of Object.entries(operation.cost)) {
+            if (!cost[0] || !cost[1]) {
+                continue;
+            }
             const resource = resourceSchema.parse(cost[0])
             const value = cost[1] * this.root.config.operationScaleFactor[operation.rarity]
             // Check if enough resources are available
@@ -454,11 +457,11 @@ export class OperationsStore {
 
         // Apply bonus effects if specified
         if (operation.rewards.bonus) {
-            const {bonus} = operation.rewards
+            const { bonus } = operation.rewards
             // Only handle multiplier type bonuses with duration
             if (bonus.type === "multiplier" && bonus.duration) {
                 const expiresAt = Date.now() + (bonus.duration * 1000)
-                this.activeBonuses.push({bonus, expiresAt})
+                this.activeBonuses.push({ bonus, expiresAt })
             }
         }
 

@@ -102,6 +102,7 @@ export class SyncStore {
         finally {
             this.state = "idle"
         }
+        return undefined
     }
 
     reset() {
