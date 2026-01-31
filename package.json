@@ -1,0 +1,48 @@
+{
+  "name": "@miskamyasa/mobx-clicker-game-engine",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A MobX-based clicker game engine.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --clean"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "mobx": "6.15.0",
+    "zod": "4.1.13"
+  },
+  "devDependencies": {
+    "tsup": "8.5.1",
+    "typescript": "5.9.3"
+  },
+  "keywords": [
+    "mobx",
+    "clicker",
+    "game",
+    "engine"
+  ],
+  "author": "Denis <MiskaMyasa> Zaitsev",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Miskamyasa/mobx-clicker-game-engine.git"
+  },
+  "homepage": "https://github.com/Miskamyasa/mobx-clicker-game-engine#readme",
+  "bugs": {
+    "url": "https://github.com/Miskamyasa/mobx-clicker-game-engine/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
