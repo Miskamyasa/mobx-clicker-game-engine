@@ -5,19 +5,7 @@ You're a survey commander establishing humanity's first foothold on an alien wor
 
 ---
 
-## Engine Mechanics Contract
-
-- Canonical resource keys: `energy`, `output`, `reputation`, `money`.
-- Scan loop: spend `energy` to gain `output`.
-- Operations consume resources (typically `output`, sometimes `energy`/`money`) and yield `reputation` plus optional rewards.
-- Base mechanics:
-  - Game runs in 1s rounds: workers generate `energy`/`output`, reputation generates `money`.
-  - Click action spends `energy` to gain `output` (both scaled by level + multipliers).
-  - Workers cost `money` and add passive production each round.
-  - Operations spend resources, then become claimable after `duration` and enter `cooldown`.
-  - Claiming operations grants `reputation` and may grant resources, temporary bonuses, and articles.
-  - Levels unlock from total operations + required articles; levels scale click costs/gains.
-  - Prestige resets most progress for permanent points/upgrades and starting bonuses.
+> Base mechanics: [Engine Mechanics Contract](./_mechanics-contract.md)
 
 ---
 

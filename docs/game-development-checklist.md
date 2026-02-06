@@ -2,7 +2,7 @@
 
 ## Phase 1: Project Bootstrap
 - **Initialize React project** (Vite + TypeScript recommended)
-- **Install engine dependencies** (`@miskamyasa/mobx-clicker-game-engine`, `mobx-react-lite`, `mobx`)
+- **Install engine dependencies** (`@miskamyasa/mobx-clicker-game-engine`, `mobx`, and MobX bindings for your framework)
 - **Set up project structure** (`/src/components`, `/src/hooks`, `/src/styles`, `/public/settings`)
 - **Configure TypeScript** with strict mode and engine types
 - **Set up ESLint/Prettier** for code consistency
