@@ -12,75 +12,35 @@ An education sandbox for exploring agent‑driven development. This engine provi
 
 This package provides a data‑driven clicker‑game engine (MobX stores + save system). You bring the UI in any frontend framework, and the game content lives in JSON settings files.
 
-## How to Use (Step by Step)
-
-1. **Generate game setting data first.**  
-
-- Create a new setting under `public/settings/<setting>/` with JSON files for `workers`, `levels`, `operations`, `upgrades`, `achievements`, `articles`, and `prestige-upgrades`.  
-- Use the engine Zod schemas in `src/stores/*.ts` as the reference for structure and validation rules.
-
-2. **Create a new frontend app.** 
-
-Start a fresh React/Vue/other project (Vite, Next, Nuxt, etc.).
-
-3. **Install the engine package.** 
-
-Add the engine dependency to your app.
-   
-4. **Wire the engine to your data URLs.** 
-
-Provide `dataUrls` with required keys: `workers`, `levels`, `operations`, `upgrades`, `achievements`, `articles`, `prestigeUpgrades`.
-
-Example (Vite/Next public assets):
+## Quick Example
 
 ```ts
 import {createEngine} from "@miskamyasa/mobx-clicker-game-engine"
 
-const setting = "ocean" // folder name under /public/settings/<setting>/
-
-export const engine = createEngine({
+const engine = createEngine({
   dataUrls: {
-    workers: `/settings/${setting}/workers.json`,
-    levels: `/settings/${setting}/levels.json`,
-    operations: `/settings/${setting}/operations.json`,
-    upgrades: `/settings/${setting}/upgrades.json`,
-    achievements: `/settings/${setting}/achievements.json`,
-    articles: `/settings/${setting}/articles.json`,
-    prestigeUpgrades: `/settings/${setting}/prestige-upgrades.json`,
+    workers: "/settings/ocean/workers.json",
+    levels: "/settings/ocean/levels.json",
+    operations: "/settings/ocean/operations.json",
+    upgrades: "/settings/ocean/upgrades.json",
+    achievements: "/settings/ocean/achievements.json",
+    articles: "/settings/ocean/articles.json",
+    prestigeUpgrades: "/settings/ocean/prestige-upgrades.json",
   },
 })
+
+engine.game.start()
 ```
 
-Notes:
-- The *object keys* must match the engine contract; the *filenames* can be anything.
-- Use the engine Zod schemas in `src/stores/*.ts` as the source of truth for JSON structure.
+## Documentation
 
-5. **Render core stats.**  
+- [Quickstart](./docs/quickstart.md) — Installation, setup, and framework integration
+- [API Reference](./docs/API.md) — Store architecture, methods, properties, types
+- [Data Contracts](./docs/data-contracts.md) — JSON schema reference for all game content files
+- [Game Development Checklist](./docs/game-development-checklist.md) — Phase-by-phase action items
+- [Example Themes](./docs/examples/README.md) — Ocean, archaeology, space colony, and how to create your own
 
-Show resources, level, and progression state from the engine.
-
-6. **Add the primary click action.** 
-
-Bind a button to the main action (e.g., “dive” / “click”).
-
-7. **Add automation and upgrades.** 
-
-Build panels for workers and upgrades and wire them to the engine actions.
-
-8. **Add operations and codex UI.** 
-
-Render operations, achievements, and articles as your content expands.
-
-## Framework Integration
-
-- **React:** Use MobX bindings from [mobx-react-lite](https://www.npmjs.com/package/mobx-react-lite).
-- **Vue:** Use MobX bindings from [mobx-vue-use](https://www.npmjs.com/package/mobx-vue-use).
-
-## Persistence
-
-Persistence is built into the engine (auto‑save, offline progress, localStorage). You don’t need to implement save/load manually unless you want custom storage.
-
-## Who It’s For
+## Who It's For
 
 - Developers learning agent‑assisted workflows.
 - Researchers evaluating agent performance.

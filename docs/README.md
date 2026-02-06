@@ -9,6 +9,7 @@
 ## Guides
 
 - [Game Development Checklist](./game-development-checklist.md) - Phase-by-phase action items for building a game
+- [AGENTS.md Template](./AGENTS.md) - Ready-to-copy AI agent guide for game projects
 
 ## Examples
 
