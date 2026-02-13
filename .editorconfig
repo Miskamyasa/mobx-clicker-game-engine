@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 [*.*]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 [*.{ts,tsx}]
 ij_any_catch_on_new_line = true
@@ -18,7 +18,7 @@ ij_any_else_on_new_line = true
 ij_any_finally_on_new_line = true
 
 [*.{yml,yaml}]
-indent_size = 4
+indent_size = 2
 
 [Makefile]
 indent_style = tab

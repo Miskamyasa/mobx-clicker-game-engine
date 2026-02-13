@@ -19,7 +19,7 @@ Array of worker definitions:
     },
     "costMultiplier": 1.15,
     "unlockConditions": [
-      {"type": "default"}
+      { "type": "default" }
     ]
   }
 ]
@@ -104,11 +104,11 @@ Array of research operations:
       }
     },
     "requirements": [
-      {"type": "level", "level": 0}
+      { "type": "level", "level": 0 }
     ],
     "articlesUnlocks": [
-      {"level": 1, "id": "reef-basics"},
-      {"level": 5, "id": "reef-symbiosis"}
+      { "level": 1, "id": "reef-basics" },
+      { "level": 5, "id": "reef-symbiosis" }
     ]
   }
 ]
@@ -146,7 +146,7 @@ Array of permanent upgrades:
     },
     "costMultiplier": 1.5,
     "effect": [
-      {"type": "energyGain", "value": 1.2}
+      { "type": "energyGain", "value": 1.2 }
     ],
     "unlockCondition": {
       "type": "level",

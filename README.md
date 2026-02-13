@@ -15,7 +15,7 @@ This package provides a data‑driven clicker‑game engine (MobX stores + save 
 ## Quick Example
 
 ```ts
-import {createEngine} from "@miskamyasa/mobx-clicker-game-engine"
+import { createEngine } from "@miskamyasa/mobx-clicker-game-engine"
 
 const engine = createEngine({
   dataUrls: {

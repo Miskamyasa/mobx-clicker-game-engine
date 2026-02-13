@@ -22,7 +22,7 @@ See [Data Contracts](./data-contracts.md) for the schema of each file. Use the e
 
 ## Step 2: Initialize the Engine
 
-Provide `dataUrls` with the required keys. The *object keys* must match the engine contract; the *filenames* can be anything.
+Provide `dataUrls` with the required keys. The _object keys_ must match the engine contract; the _filenames_ can be anything.
 
 ```typescript
 import { createEngine } from "@miskamyasa/mobx-clicker-game-engine"

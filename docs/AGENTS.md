@@ -42,15 +42,15 @@ ALWAYS follow these formatting rules for documentation and user communication:
 
 Seven required JSON files in `public/settings/<theme>/`:
 
-| File | Engine key | Content |
-|------|-----------|---------|
-| `workers.json` | `workers` | Team members that generate resources |
-| `levels.json` | `levels` | Progression zones with unlock requirements |
-| `operations.json` | `operations` | Actions that consume resources and grant rewards |
-| `upgrades.json` | `upgrades` | Permanent improvements with multiplier effects |
-| `achievements.json` | `achievements` | Milestone rewards with unlock conditions |
-| `articles.json` | `articles` | Lore content unlocked through operations |
-| `prestige-upgrades.json` | `prestigeUpgrades` | Meta-progression purchased with prestige points |
+| File                     | Engine key         | Content                                          |
+| ------------------------ | ------------------ | ------------------------------------------------ |
+| `workers.json`           | `workers`          | Team members that generate resources             |
+| `levels.json`            | `levels`           | Progression zones with unlock requirements       |
+| `operations.json`        | `operations`       | Actions that consume resources and grant rewards |
+| `upgrades.json`          | `upgrades`         | Permanent improvements with multiplier effects   |
+| `achievements.json`      | `achievements`     | Milestone rewards with unlock conditions         |
+| `articles.json`          | `articles`         | Lore content unlocked through operations         |
+| `prestige-upgrades.json` | `prestigeUpgrades` | Meta-progression purchased with prestige points  |
 
 Canonical resources: `energy`, `output`, `reputation`, `money`.
 
@@ -66,23 +66,22 @@ docs/                       — Game-specific documentation
 
 ## Key Stores (Consumer API)
 
-| Store | Access | Purpose |
-|-------|--------|---------|
-| GameStore | `engine.game` | Game loop, click action |
-| ResourcesStore | `engine.resources` | energy, output, reputation, money |
-| WorkersStore | `engine.workers` | Hiring, passive production |
-| OperationsStore | `engine.operations` | Conduct/claim, cooldowns |
-| UpgradesStore | `engine.upgrades` | Purchase upgrades, multipliers |
-| LevelStore | `engine.level` | Progression, zone selection |
-| AchievementsStore | `engine.achievements` | Unlock tracking, rewards |
-| PrestigeStore | `engine.prestige` | Reset mechanics, breakthrough points |
-| CodexStore | `engine.codex` | Article unlocking |
-| SyncStore | `engine.sync` | Save/load state (localStorage) |
-| ToastStore | `engine.toast` | Notification messages |
-| ConfirmationStore | `engine.confirmation` | Modal confirmation dialogs |
+| Store             | Access                | Purpose                              |
+| ----------------- | --------------------- | ------------------------------------ |
+| GameStore         | `engine.game`         | Game loop, click action              |
+| ResourcesStore    | `engine.resources`    | energy, output, reputation, money    |
+| WorkersStore      | `engine.workers`      | Hiring, passive production           |
+| OperationsStore   | `engine.operations`   | Conduct/claim, cooldowns             |
+| UpgradesStore     | `engine.upgrades`     | Purchase upgrades, multipliers       |
+| LevelStore        | `engine.level`        | Progression, zone selection          |
+| AchievementsStore | `engine.achievements` | Unlock tracking, rewards             |
+| PrestigeStore     | `engine.prestige`     | Reset mechanics, breakthrough points |
+| CodexStore        | `engine.codex`        | Article unlocking                    |
+| SyncStore         | `engine.sync`         | Save/load state (localStorage)       |
+| ToastStore        | `engine.toast`        | Notification messages                |
+| ConfirmationStore | `engine.confirmation` | Modal confirmation dialogs           |
 
 Full method signatures: [API Reference](https://raw.githubusercontent.com/Miskamyasa/mobx-clicker-game-engine/refs/heads/main/docs/API.md)
-
 
 ## Development Phases
 

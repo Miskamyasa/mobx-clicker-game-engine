@@ -4,12 +4,12 @@ Shared base mechanics for all game themes. Each theme maps its own flavor onto t
 
 ## Canonical Resources
 
-| Key | Role |
-|-----|------|
-| `energy` | Consumed by click actions, produced by workers |
-| `output` | Gained from clicks, spent on operations |
+| Key          | Role                                              |
+| ------------ | ------------------------------------------------- |
+| `energy`     | Consumed by click actions, produced by workers    |
+| `output`     | Gained from clicks, spent on operations           |
 | `reputation` | Earned from operations, generates money over time |
-| `money` | Used for workers and upgrades |
+| `money`      | Used for workers and upgrades                     |
 
 ## Core Loop
 

@@ -1,18 +1,18 @@
 {
- "compilerOptions": {
+  "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
     "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
     "declaration": true,
     "outDir": "./dist",
-    "moduleResolution": "Node",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    "skipLibCheck": true
   },
   "include": ["src"]
 }

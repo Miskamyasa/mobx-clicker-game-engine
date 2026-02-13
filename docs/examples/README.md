@@ -6,11 +6,11 @@ All examples share a common [Engine Mechanics Contract](./_mechanics-contract.md
 
 ## Available Themes
 
-| Theme | File | Core Fantasy |
-|-------|------|-------------|
-| Ocean Explorer | [ocean.md](./ocean.md) | Lead a marine research program into the deep sea |
-| Lost Civilizations | [archaeology.md](./archaeology.md) | Excavate layers of a forgotten ancient site |
-| Space Colony | [space-colony.md](./space-colony.md) | Establish humanity's first foothold on an alien world |
+| Theme              | File                                 | Core Fantasy                                          |
+| ------------------ | ------------------------------------ | ----------------------------------------------------- |
+| Ocean Explorer     | [ocean.md](./ocean.md)               | Lead a marine research program into the deep sea      |
+| Lost Civilizations | [archaeology.md](./archaeology.md)   | Excavate layers of a forgotten ancient site           |
+| Space Colony       | [space-colony.md](./space-colony.md) | Establish humanity's first foothold on an alien world |
 
 ## Creating a New Theme
 

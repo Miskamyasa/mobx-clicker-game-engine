@@ -15,7 +15,7 @@ The engine consists of interconnected MobX stores:
 RootStore
 ├── GameStore         - game loop, click action
 ├── ResourcesStore    - energy, output, reputation, money
-├── WorkersStore      - hiring, passive production  
+├── WorkersStore      - hiring, passive production
 ├── OperationsStore   - conduct/claim, cooldowns
 ├── UpgradesStore     - purchase upgrades, multipliers
 ├── LevelStore        - progression, unlocking
@@ -49,6 +49,7 @@ Workers → Energy → Click → Output → Operations → Reputation → Money 
 ### Data URLs Contract
 
 Your `dataUrls` object must contain exactly these keys:
+
 - `workers`: Team members that generate resources
 - `levels`: Progression zones with unlock requirements
 - `operations`: Actions that consume resources and grant rewards
@@ -64,6 +65,7 @@ Your `dataUrls` object must contain exactly these keys:
 Creates and initializes the game engine.
 
 **Parameters:**
+
 - `options.dataUrls`: Object mapping required data URLs
 
 **Returns:** `RootStore` instance with all child stores
@@ -79,6 +81,7 @@ The main container for all game stores.
 - `dataSource: EngineDataSource` - Handles fetching JSON data
 
 All child stores are accessible as properties:
+
 - `game`, `resources`, `workers`, `operations`, `upgrades`, `level`
 - `achievements`, `prestige`, `codex`, `sync`, `config`, `toast`, `confirmation`
 
@@ -89,15 +92,19 @@ Controls the main game loop and core click action.
 ### Methods
 
 ##### `start(): void`
+
 Starts the game loop (1-second intervals).
 
-##### `stop(): void` 
+##### `stop(): void`
+
 Stops the game loop and saves progress.
 
 ##### `reset(): void`
+
 Stops the game and resets all progress.
 
 ##### `click(): void`
+
 Executes the main click action: spend energy to gain output.
 
 ### Properties
@@ -113,12 +120,15 @@ Manages the four core resources and their production rates.
 ### Methods
 
 ##### `addResource(resource: Resource, amount: number): void`
+
 Adds resources safely (validates non-negative).
 
 ##### `spendResource(resource: Resource, amount: number): boolean`
+
 Attempts to spend resources. Returns `true` if successful.
 
 ##### `spendResourcesByCost(cost: Partial<Resources>, multiplier: number): boolean`
+
 Spends multiple resources atomically. Returns `true` if all costs were paid.
 
 ### Properties
@@ -138,9 +148,11 @@ Handles hiring workers and calculating production bonuses.
 ### Methods
 
 ##### `hireWorker(worker: Worker): void`
+
 Hires a worker if you have enough money. Throws error if insufficient funds.
 
 ##### `calculateWorkerCost(worker: Worker, currentCount?: number): number`
+
 Calculates the cost to hire the next worker of this type.
 
 ### Properties
@@ -159,15 +171,19 @@ Manages operations (research actions) with duration and cooldown mechanics.
 ### Methods
 
 ##### `conductOperation(operation: Operation): number`
+
 Starts an operation if you can afford it. Returns duration in seconds for animations.
 
 ##### `claimOperation(operation: Operation): void`
+
 Claims rewards from a completed operation.
 
 ##### `actOnOperation(operation: Operation): number | undefined`
+
 Combined method: conducts if idle, claims if ready. Returns duration or 0.
 
 ##### `canAffordOperation(operation: Operation): boolean`
+
 Checks if you have enough resources to start an operation.
 
 ### Properties
@@ -187,9 +203,11 @@ Handles purchasing permanent upgrades that provide multiplier bonuses.
 ### Methods
 
 ##### `purchaseUpgrade(upgrade: Upgrade): void`
+
 Purchases the next level of an upgrade. Throws error if can't afford or maxed out.
 
 ##### `canPurchaseUpgrade(upgrade: Upgrade): boolean`
+
 Checks if upgrade can be purchased (affordable, unlocked, not maxed).
 
 ### Properties
@@ -206,6 +224,7 @@ Manages progression through different game levels/zones.
 ### Methods
 
 ##### `selectLevel(levelIndex: number): void`
+
 Changes to a different unlocked level. Throws error if level not unlocked.
 
 ### Properties
@@ -234,15 +253,19 @@ Handles meta-progression through prestige resets.
 ### Methods
 
 ##### `executePrestige(): void`
+
 Performs prestige reset: awards points, resets progress, applies bonuses.
 
 ##### `purchaseUpgrade(upgradeId: string): void`
+
 Purchases a prestige upgrade with breakthrough points.
 
 ##### `calculatePotentialBP(): number`
+
 Calculates breakthrough points that would be earned from prestiging now.
 
 ##### `canPrestige(): boolean`
+
 Returns true if you meet the minimum requirements to prestige.
 
 ### Properties
@@ -260,6 +283,7 @@ Manages unlockable lore articles.
 ### Methods
 
 ##### `unlockArticle(articleId: string): void`
+
 Unlocks an article and shows a toast notification.
 
 ### Properties
@@ -274,12 +298,15 @@ Handles save/load operations with localStorage.
 ### Methods
 
 ##### `save(): Promise<void>`
+
 Saves current game state to localStorage (generator function, use with `flowResult`).
 
 ##### `load(): Promise<number | undefined>`
+
 Loads game state from localStorage. Returns save timestamp or undefined.
 
 ##### `reset(): void`
+
 Resets all stores to initial state and clears localStorage.
 
 ### Properties
@@ -295,15 +322,19 @@ Shows temporary notification messages.
 ### Methods
 
 ##### `showToast(options: Omit<ToastMessage, "id">): void`
+
 Displays a toast notification with auto-dismiss.
 
 ##### `dismissToast(id: number): void`
+
 Manually dismisses a specific toast.
 
 ##### `showAchievementToast(achievement: Achievement): void`
+
 Convenience method for achievement notifications.
 
 ##### `showArticleToast(article: Article): void`
+
 Convenience method for article unlock notifications.
 
 ### Properties
@@ -317,9 +348,11 @@ Handles modal confirmation dialogs.
 ### Methods
 
 ##### `ask(options: ConfirmationOptions): Promise<boolean>`
+
 Shows a confirmation dialog and returns user's choice.
 
 ##### `resolve(confirmed: boolean): void`
+
 Resolves the current confirmation dialog.
 
 ### Properties
@@ -329,29 +362,32 @@ Resolves the current confirmation dialog.
 ## Types & Constants
 
 ### Resource Constants
+
 ```typescript
 const RESOURCES = ["energy", "output", "reputation", "money"] as const
 type Resource = typeof RESOURCES[number]
 ```
 
 ### Rarity Enum
-```typescript  
+
+```typescript
 const RARITY = ["common", "uncommon", "rare", "epic", "legendary"] as const
 type Rarity = typeof RARITY[number]
 ```
 
 ### Multiplier Types
+
 ```typescript
-type GainMultiplier = 
-  | "energyGain" 
-  | "outputGain"
-  | "operationCostReduction"
-  | "reputationGain" 
-  | "moneyGain"
-  | "workersEfficiency"
-  | "operationDurationReduction"
-  | "offlineEfficiency"
-  | "workerCostReduction"
+type GainMultiplier
+  = | "energyGain"
+    | "outputGain"
+    | "operationCostReduction"
+    | "reputationGain"
+    | "moneyGain"
+    | "workersEfficiency"
+    | "operationDurationReduction"
+    | "offlineEfficiency"
+    | "workerCostReduction"
 ```
 
 ## Advanced Topics
@@ -366,7 +402,7 @@ interface GameSaveSnapshot {
   timestamp: number
   resources: {
     energy: number
-    output: number  
+    output: number
     reputation: number
     money: number
   }
@@ -375,8 +411,8 @@ interface GameSaveSnapshot {
   }
   operations: {
     operationsFinished: Record<string, number>
-    operationsProgress: Record<string, {claimableAt: number, cooldownTill: number}>
-    activeBonuses: Array<{bonus: Bonus, expiresAt: number}>
+    operationsProgress: Record<string, { claimableAt: number, cooldownTill: number }>
+    activeBonuses: Array<{ bonus: Bonus, expiresAt: number }>
   }
   // ... other store snapshots
 }
@@ -402,13 +438,13 @@ class ExtendedGameStore {
   constructor(private baseStore: GameStore) {
     makeObservable(this)
   }
-  
+
   superClick() {
     for (let i = 0; i < 10; i++) {
       this.baseStore.click()
     }
   }
-  
+
   get running() { return this.baseStore.running }
   start() { this.baseStore.start() }
 }
@@ -425,7 +461,7 @@ const engine = {
 Modify game balance by accessing `ConfigStore`:
 
 ```typescript
-engine.config.baseEnergyCost = 10        // Higher click costs
-engine.config.localSaveInterval = 10000  // Save every 10 seconds
-engine.config.operationScaleFactor.rare = 2.0  // More expensive rare operations
+engine.config.baseEnergyCost = 10 // Higher click costs
+engine.config.localSaveInterval = 10000 // Save every 10 seconds
+engine.config.operationScaleFactor.rare = 2.0 // More expensive rare operations
 ```
